@@ -16,3 +16,6 @@ rightTriangles = [(a,b,c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2+b^2==c^2
 is24 (a,b,c) = a + b + c == 24
 
 rightTrianglesWithPerimeter24 = [x | x <- rightTriangles, is24 x]
+
+addThree :: Int -> Int -> Int -> Int
+addThree x y z = x + y + z
