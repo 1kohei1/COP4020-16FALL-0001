@@ -7,6 +7,10 @@
 --      Victoria Proetsch
 --      David Waters
 --
+
+module Chess where
+import Data.Char
+
 --  Problem 1
 computePolygonArea :: [(Double, Double)] -> Double
 computePolygonArea [] = error "No points in the list. ERROR!!"
@@ -25,8 +29,6 @@ det (a, b) (c, d) = a * d - b * c
 
 -- Problem 2
 -- Learn how to declare custom type
-module Chess where
-import Data.Char
 
 -- See https://en.wikipedia.org/wiki/Chess for more details
 -- We only consider the situation where there is only a single
