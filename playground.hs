@@ -74,7 +74,7 @@ bimTell weight height
         skinny = 18.5
         normal = 25.0
         fat = 30.0
-  
+
 max' :: (Ord a) => a -> a -> a
 max' a b
   | a < b = b
@@ -126,6 +126,114 @@ quicksort (x:xs) =
   let smallerSorted = quicksort [a | a <- xs, a <= x]
       biggerSorted = quicksort [a | a <- xs, a > x]
   in smallerSorted ++ [x] ++ biggerSorted
+
+-- module 6
+
+multThree :: (Num a) => a -> a -> a -> a
+multThree x y z = x * y * z
+
+compareWith100 :: (Num a, Ord a) => a -> Ordering
+compareWith100 = compare 100
+
+divideBy10 :: (Floating a) => a -> a
+divideBy10 = (/10)
+
+isUpperCase :: Char -> Bool
+isUpperCase = (`elem` ['A'..'Z'])
+
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (x:xs) (y:ys) = f x y: zipWith' f xs ys
+
+flip' :: (a -> b -> c) -> (b -> a -> c)
+flip' f = g
+  where g x y = f y x
+
+--  find the largest number under 100,000 that's divisible by 3829
+largestNumUptoNDivisibleByM :: (Integral a) => a -> a -> a
+largestNumUptoNDivisibleByM n m
+  | m == 0 = error "Division by 0 is not supported"
+  | n < 1 = error "Number starts from 1. Please enter the number greater than or equal to 1"
+  | length list == 0 = error "No such number is found"
+  | otherwise = last list
+  where list = divisibleByMInN n m
+
+divisibleByMInN :: (Integral a, Enum a) => a -> a -> [a]
+divisibleByMInN n m = filter (isDivisible m) [1..n]
+
+isDivisible :: (Integral a) => a -> a -> Bool
+isDivisible m n = n `mod` m == 0
+
+-- find the sum of all odd squares that are smaller than 10,000
+sumOfSquaresSmallerThan1000 = sum (takeWhile (<10000) (filter odd (map (^2) [1..])))  
+
+-- for all starting numbers between 1 and 100, how many chains have a length greater than 15?
+countChainLengthGreaterThan15 = length [x | x <- [1..100], isChainGreaterThan15 [x]]
+
+-- Takes a starting number and returns if it's length is greater than 15 or not
+isChainGreaterThan15 :: (Integral a) => [a] -> Bool
+isChainGreaterThan15 list
+  | length list > 15 = True
+  | lastItem == 1 = False
+  | otherwise = isChainGreaterThan15 (list ++ [nextItem])
+  where lastItem = last list
+        nextItem = if even lastItem then lastItem `div` 2 else lastItem * 3 + 1
+
+-- Let's make this more generic
+-- Takes two number n and m. Returns the number of chains whose Collatz sequences length is greater than m. Start number is in range of [1..n]
+{-| But cannot finish solve the compile error.
+countCollatzSequenceGreaterThan :: (Integral a, Enum a) => a -> x -> x
+countCollatzSequenceGreaterThan n m
+  | n < 1     = error "Collatz sequence start number must be a natural number"
+  | otherwise = length [x | x <- [1..n], lengthIsGreaterThanM [x] m]
+
+lengthIsGreaterThanM :: Int a => [a] -> a -> Bool
+lengthIsGreaterThanM list m
+  | (length list) > m = True
+  | lastItem == 1     = False
+  | otherwise         = lengthIsGreaterThanM (list ++ [nextItem])
+  where lastItem = last list
+        nextItem = if even lastItem then lastItem `div` 2 else lastItem * 3 + 1
+-}
+
+sum'' :: (Num a) => [a] -> a
+sum'' xs  = foldl (\acc x -> acc + x) 0 xs
+
+elem'' :: (Eq a) => a -> [a] -> Bool
+elem'' y ys = foldl (\acc x -> if x == y then True else acc) False ys
+
+map' :: (a -> b) -> [a] -> [b]
+map' f xs = foldr (\x acc -> f x: acc) [] xs
+
+
+maximum'' :: (Ord a) => [a] -> a
+maximum'' = foldr1 (\x acc -> if x > acc then x else acc)
+
+reverse'' :: [a] -> [a]
+reverse'' = foldl (\acc x -> x : acc) []
+
+product' :: (Num a) => [a] -> a
+product' = foldr1 (*)
+
+-- How many elements does it take for the sum of the roots of all natural numbers to exceed 1000?
+
+numElementsToSumRootExeec1000 :: Int 
+numElementsToSumRootExeec1000 = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+-- Function application with $ is interesting. This makes so easy to read code.
+
+-- map (\x -> negate (abs x)) [5,-3,-6,7,-3,2,-19,24]
+-- This negates all of the value in the list
+-- This is equal to  map (negate . abs) [5,-3,-6,7,-3,2,-19,24]  
+
+oddSquareSum :: Integer
+oddSquareSum = sum .takeWhile (<10000) . filter odd . map (^2) $ [1..]
+
+
 
 
 

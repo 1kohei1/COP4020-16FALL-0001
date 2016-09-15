@@ -7,3 +7,4 @@ head' (x:xs) = x
 tail' :: [a] -> [a]
 tail' [] = error "empty"
 tail' (_:x) = x
+

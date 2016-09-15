@@ -15,3 +15,4 @@ det :: (Double,Double) -> (Double,Double) -> Double
 det (a, b) (c, d) = a * d - b * c
 
 -- Problem 2
+-- Learn how to declare custom type
