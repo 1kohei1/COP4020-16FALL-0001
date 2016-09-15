@@ -233,11 +233,3 @@ numElementsToSumRootExeec1000 = length (takeWhile (<1000) (scanl1 (+) (map sqrt 
 oddSquareSum :: Integer
 oddSquareSum = sum .takeWhile (<10000) . filter odd . map (^2) $ [1..]
 
-
-
-
-
-
-
-
-
