@@ -1,13 +1,13 @@
 --
---	Team:			Haskel Coder 24
---	Team Members:	Kohei Arai
---				    Sandra Hoopes
---				    Alex Lascalbar
---				    Victoria Proetsch
---				    David Waters 
---	                Assignment:	2
---	                Course:		COP 4020
---	                Semester:	Fall 2016
+--  Team:           Haskell Coder 24
+--	Team Members:   Kohei Arai
+--                  Sandra Hoopes
+--                  Alex Lascalbar
+--                  Victoria Proetsch
+--                  David Waters 
+--                  Assignment:	2
+--                  Course:		COP 4020
+--                  Semester:	Fall 2016
 
 --  Problem 1
 
@@ -31,7 +31,7 @@ filterLast p (x:xs)                                     -- multiple element list
     | foldr1 (&&) (map p xs)    = xs                    -- p x is false, all following are true
     | otherwise                 = x : filterLast p xs   -- p x is false, but another false remains
     
---  c)  split - split a list into two lists, picking elements alternately    
+--  c)  split - Splits a list into two lists, picking elements alternately    
 split :: [a] -> ([a], [a])
 split [] = ([], [])
 split (x:[]) = (x:[], [])
