@@ -11,16 +11,14 @@
 
 --  Problem 1
 
---  a)   filerFirst - Removes the first element of xs which does not
-satisfy the property p
+--  a)   filerFirst - Removes the first element of xs which does not satisfy the property p
 filterFirst :: (a -> Bool) -> [a] -> [a]
 filterFirst p [] = []
 filterFirst p (x:xs)
     | p x = x : filterFirst p xs
     | otherwise = xs
     
---  b)   filterLast - Removes the last element of xs which does not
-satisfy the property p
+--  b)   filterLast - Removes the last element of xs which does not satisfy the property p
 filterLast :: (a -> Bool) -> [a] -> [a]
 filterLast p [] = []
 filterLast p [x]                                        -- single-element list

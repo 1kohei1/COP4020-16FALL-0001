@@ -39,8 +39,17 @@ a = char 'a'
 b = char 'b'
 
 -- Our answer
+-- option
+option :: RegExp -> RegExp
+option e = epsilon <|> e
+
+-- plus
+plus :: RegExp -> RegExp
+plus e = e <..> star e
+
+
 number :: RegExp
-number = num1_9 <..> star num0_9
+number = num1_9 <..> star num0_9 <|> zero
 
 num0_9 :: RegExp
 num0_9 = foldl1 (<|>) (map char $ ['0'..'9'])
