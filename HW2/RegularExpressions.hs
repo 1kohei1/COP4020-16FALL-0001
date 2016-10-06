@@ -1,3 +1,5 @@
+module RegularExpressions where
+
 -- regular expression
 
 infixl 8 <|>

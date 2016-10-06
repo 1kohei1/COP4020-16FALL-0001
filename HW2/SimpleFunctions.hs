@@ -1,3 +1,5 @@
+module SimpleFunctions where
+
 --
 -- Team: Haskel Coder 24
 -- Team Members:	Kohei Arai
